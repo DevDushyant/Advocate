@@ -1,0 +1,266 @@
+﻿@model Advocate.Dtos.ActDetailDescriptionDto
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<h4>Act Detail Description</h4>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.ActType)</dt>
+        <dd class="col-sm-4">@Html.DisplayFor(model => model.ActType) </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActNumber)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.ActNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActYear)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.ActYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssentBy)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.AssentBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssentDate)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.AssentDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActName)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.ActName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PublishedIn)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PublishedIn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PartName)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PartName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nature)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.Nature)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GazetteDate)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.GazetteDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PageNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PageNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ComeInforce)
+        </dt>
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.ComeInforce)
+        </dd>
+        @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ActCategory)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.ActCategory)
+            </dd>*@
+    </dl>
+
+    <fieldset>
+        <legend>Act Book Detail</legend>
+        <table style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;">
+            <thead>
+                <tr>
+                    <th style="width:5%!important">Sr.</th>
+                    <th style="width:20%!important">Name</th>
+                    <th style="width:15%!important">Short Name</th>
+                    <th style="width:10%!important">Year</th>
+                    <th style="width:10%!important">Volume</th>
+                    <th style="width:10%!important">Page Number</th>
+                    <th style="width:10%!important">Serial Number</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{ int count = 0;}
+                @foreach (var item in Model.ActBookList)
+                {
+                    <tr>
+                        <td>@{ count++;}@count</td>
+                        <td>@item.BookName</td>
+                        <td>@item.ShortName</td>
+                        <td>@item.Year</td>
+                        <td>@item.Volume</td>
+                        <td>@item.PageNo</td>
+                        <td>@item.SerialNo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+
+    @if (Model.SubjectList != null)
+    {
+        <fieldset>
+            <legend>Act Subject Detail</legend>
+            <table style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;">
+                <thead>
+                    <tr>
+                        <th style="width:5%!important">Sr.</th>
+                        <th style="width:90%!important">Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int subcount = 0;}
+                    @foreach (var item in Model.SubjectList)
+                    {
+                        <tr>
+                            <td>@{ subcount++;}@subcount</td>
+                            <td>@item.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+    }
+    @if (Model.Amended_ActList != null)
+    {
+        <div>THE FOLLOWING ACT/ORD HAS BEEN AMENDED BY SELECTED ACT:</div>
+        <table style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;">
+            <thead>
+                <tr>
+                    <th style="width:5%!important">Sr.</th>
+                    <th style="width:20%!important">Act Type</th>
+                    <th style="width:20%!important">Act Number</th>
+                    <th style="width:20%!important">Act Year</th>
+                    <th style="width:35%!important">Act Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.Amended_ActList)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>
+                        <td>@item.ActType</td>
+                        <td>@item.ActNumber</td>
+                        <td>@item.ActYear</td>
+                        <td>@item.ActName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model.Repealed_ActList != null)
+    {
+        <div>THE FOLLOWING ACT/ORD HAS BEEN REPEALED BY SELECTED ACT:</div>
+        <table style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;">
+            <thead>
+                <tr>
+                    <th style="width:5%!important">Sr.</th>
+                    <th style="width:20%!important">Act Type</th>
+                    <th style="width:20%!important">Act Number</th>
+                    <th style="width:20%!important">Act Year</th>
+                    <th style="width:35%!important">Act Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.Repealed_ActList)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>
+                        <td>@item.ActType</td>
+                        <td>@item.ActNumber</td>
+                        <td>@item.ActYear</td>
+                        <td>@item.ActName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model.AmendedBy_ActList != null)
+    {
+        <div>SELECTED ACT HAS BEEN AMENDED BY THE FOLLOWING ACT/ORD:</div>
+        <table style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;">
+            <thead>
+                <tr>
+                    <th style="width:5%!important">Sr.</th>
+                    <th style="width:20%!important">Act Type</th>
+                    <th style="width:20%!important">Act Number</th>
+                    <th style="width:20%!important">Act Year</th>
+                    <th style="width:35%!important">Act Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.AmendedBy_ActList)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>
+                        <td>@item.ActType</td>
+                        <td>@item.ActNumber</td>
+                        <td>@item.ActYear</td>
+                        <td>@item.ActName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model.RepealedBy_ActList != null)
+    {
+        <div>SELECTED ACT HAS BEEN REPEALED BY THE FOLLOWING ACT/ORD:</div>
+        <table style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;">
+            <thead>
+                <tr>
+                    <th style="width:5%!important">Sr.</th>
+                    <th style="width:20%!important">Act Type</th>
+                    <th style="width:20%!important">Act Number</th>
+                    <th style="width:20%!important">Act Year</th>
+                    <th style="width:35%!important">Act Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.RepealedBy_ActList)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>
+                        <td>@item.ActType</td>
+                        <td>@item.ActNumber</td>
+                        <td>@item.ActYear</td>
+                        <td>@item.ActName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

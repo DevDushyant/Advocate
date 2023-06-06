@@ -1,0 +1,191 @@
+﻿<style>
+    .first-column {
+        width: 70%;
+        float: left;
+        border-right: solid;
+        border-block-color: darkblue;
+        padding-right: 50px;
+    }
+
+    .second-column {
+        width: 30%;
+        float: right;
+    }
+</style>
+
+<form id="frm_act">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act type</label>
+                <select id="ddlActType" class="form-control " name="acttype"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act No.</label>
+                <input placeholder="Please enter act number" id="actnumber" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Year</label>
+                <select id="ddlYear" name="act_year" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Assent By</label>
+                <select id="ddAssentBy" name="assent_by" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Assent Date</label>
+                <input placeholder="Please select assent date" id="assentdate" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act Name</label>
+                <input id="actname" placeholder="Please enter act name" name="act_name" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Published In</label>
+                <select id="ddlPublishedIn" name="act_publishedin" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Part</label>
+                <select id="ddlPart" name="act_part" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Nature</label>
+                <select class="form-control" id="ddlNature" name="act_nature"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Gazette Date</label>
+                <input placeholder="Please enter gazette date" id="gazetteDate" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Page No</label>
+                <input id="pagenumber" name="act_pagenumber" placeholder="Please enter page no." class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Come Inforce</label>
+                <select id="ddlCominforce" name="act_cominforce" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Subject</label>
+                <select id="ddlSubject" name="act_subject" class="form-control" multiple></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act Category</label>
+
+                <input type="radio" id="repealed" name="act_nature_type" value="repealed">
+                <label for="Repealed">Act Repealed</label>
+
+                <input type="radio" id="Amended" name="act_nature_type" value="amended">
+                <label for="Amended">Act Amended</label>
+
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-info" id="btnAddBook">Add More Book..</button>
+    <div class="row">
+        <table id="tblActBook" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Year</th>
+                    <th>Page No.</th>
+                    <th>Sr. No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><select id="ddlBook" name="act_book" class="form-control"></select></td>
+                    <td><select id="ddlBookActYear" name="act_year" class="form-control"></select></td>
+                    <td><input  id="book_pagenumber" name="act_pagenumber_book" placeholder="Please enter page no." class="form-control" /></td>
+                    <td><input type="number" id="book_serial_number" name="book_serial_number" placeholder="Please enter serial no." class="form-control" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pu">
+            <div class="form-group">
+                <button type="button" id="btnCopy" class="btn btn-info float-lg-right">Copy</button> &nbsp;
+                <button type="button" id="btnReset" class="btn btn-secondary float-lg-right">Reset</button> &nbsp;
+                <button type="button" id="btnSave" class="btn btn-secondary float-lg-right">Save</button>&nbsp;
+                <button type="button" id="btnRepeat" class="btn btn-info float">Repeat</button> &nbsp;
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="acttypmodelpopup" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" style="min-width:80%!important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Act List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="actlist" style="height: 70vh;overflow: auto;">
+                <div class="row">
+                    <div class="col-md-9 first-column">
+                        <partial name="~/Views/Shared/_ActList.cshtml" />
+                    </div>
+                    <div class="col-md-3 second-column">
+                        Selected Act List
+                        <hr />
+                        <table id="actList">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input id="btnSelectAct" type="button" value="Select Act" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

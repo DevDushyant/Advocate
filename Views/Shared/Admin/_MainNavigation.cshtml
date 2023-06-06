@@ -1,0 +1,129 @@
+﻿@using static Advocate.Helpers.NavigationIndicatorHelper;
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/Admin" class="brand-link">
+        @*<img src="~/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">*@
+        <span class="brand-text font-weight-light">LL Gupta Softwares</span>
+    </a>
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if (User.Identity.IsAuthenticated)
+                {
+            <li class="nav-item ">
+                <a asp-controller="Dashboard" asp-action="index" class="nav-link @Url.MakeActiveClass("dashboard","index")">
+                    <i class="nav-icon fas fa-chart-area"></i>
+                    <p>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
+                            <li class="nav-item ">
+                                <a asp-controller="User" asp-action="index" class="nav-link @Url.MakeActiveClass("user","index")">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        User
+                                    </p>
+                                </a>
+                            </li>
+                                            <li class="nav-item ">
+                                                <a asp-controller="role" asp-action="index" class="nav-link @Url.MakeActiveClass("role","index")">
+                                                    <i class="nav-icon fas fa-meh-rolling-eyes"></i>
+                                                    <p>
+                                                        Role
+                                                    </p>
+                                                </a>
+                                            </li>
+                                                            <li class="nav-item ">
+                                                                <a asp-controller="navigation" asp-action="index" class="nav-link @Url.MakeActiveClass("navigation","index")">
+                                                                    <i class="nav-icon fas fa-bars"></i>
+                                                                    <p>
+                                                                        Menu
+                                                                    </p>
+                                                                </a>
+                                                            </li>
+                                                                            <li class="nav-item ">
+                                                                                <a asp-controller="subject" asp-action="index" class="nav-link @Url.MakeActiveClass("subject","index")">
+                                                                                    <i class="nav-icon fas fa-bahai"></i>
+                                                                                    <p>
+                                                                                        Subject
+                                                                                    </p>
+                                                                                </a>
+                                                                            </li>
+                                                                                            <li class="nav-item ">
+                                                                                                <a asp-controller="book" asp-action="index" class="nav-link @Url.MakeActiveClass("book","index")">
+                                                                                                    <i class="nav-icon fas fa-book"></i>
+                                                                                                    <p>
+                                                                                                        Book Master
+                                                                                                    </p>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                                            <li class="nav-item ">
+                                                                                                                <a asp-controller="acttype" asp-action="index" class="nav-link @Url.MakeActiveClass("acttype","index")">
+                                                                                                                    <i class="nav-icon fas fa-skiing"></i>
+                                                                                                                    <p>
+                                                                                                                        Act Type
+                                                                                                                    </p>
+                                                                                                                </a>
+                                                                                                            </li>
+                                                                                                                            <li class="nav-item ">
+                                                                                                                                <a asp-controller="gazette" asp-action="index" class="nav-link @Url.MakeActiveClass("gazette","index")">
+                                                                                                                                    <i class="nav-icon fas fa-file-code-o"></i>
+                                                                                                                                    <p>
+                                                                                                                                        Gazette Type
+                                                                                                                                    </p>
+                                                                                                                                </a>
+                                                                                                                            </li>
+                                                                                                                                            <li class="nav-item ">
+                                                                                                                                                <a asp-controller="subgazette" asp-action="index" class="nav-link @Url.MakeActiveClass("subgazette","index")">
+                                                                                                                                                    <i class="nav-icon fas fa-file-code-o"></i>
+                                                                                                                                                    <p>
+                                                                                                                                                        Sub Gazette Type
+                                                                                                                                                    </p>
+                                                                                                                                                </a>
+                                                                                                                                            </li>
+                                                                                                                                                            <li class="nav-item ">
+                                                                                                                                                                <a asp-controller="act" asp-action="create" class="nav-link @Url.MakeActiveClass("act","create")">
+                                                                                                                                                                    <i class="nav-icon fas fa-file-code-o"></i>
+                                                                                                                                                                    <p>
+                                                                                                                                                                        Act
+                                                                                                                                                                    </p>
+                                                                                                                                                                </a>
+                                                                                                                                                            </li>
+                                                                                                                                                                            <li class="nav-item ">
+                                                                                                                                                                                <a asp-controller="rule" asp-action="create" class="nav-link @Url.MakeActiveClass("rule","create")">
+                                                                                                                                                                                    <i class="nav-icon fas fa-file-code-o"></i>
+                                                                                                                                                                                    <p>
+                                                                                                                                                                                        Rule
+                                                                                                                                                                                    </p>
+                                                                                                                                                                                </a>
+                                                                                                                                                                            </li>
+
+                                                                                                                                                                                            <li class="nav-item ">
+                                                                                                                                                                                                <a asp-controller="notificationtypes" asp-action="index" class="nav-link @Url.MakeActiveClass("notificationtypes","index")">
+                                                                                                                                                                                                    <i class="nav-icon fas fa-file-code-o"></i>
+                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                        Notification Types
+                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                            </li>
+                                                                                                                                                                                                            <li class="nav-item ">
+                                                                                                                                                                                                                <a asp-controller="notification" asp-action="create" class="nav-link @Url.MakeActiveClass("notification","create")">
+                                                                                                                                                                                                                    <i class="nav-icon fas fa-file-code-o"></i>
+                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                        Notification
+                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                            <li class="nav-item ">
+                                                                                                                                                                                                                                <a asp-controller="book" asp-action="bookentry" class="nav-link @Url.MakeActiveClass("book","bookentry")">
+                                                                                                                                                                                                                                    <i class="nav-icon fa-book"></i>
+                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                       Book Entry
+                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                            </li>}
+            </ul>
+        </nav>
+    </div>
+</aside>

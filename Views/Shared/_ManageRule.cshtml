@@ -1,0 +1,230 @@
+﻿<form id="frm_rule">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act type</label>
+                <select id="ddlActType" class="form-control " name="acttype"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act</label>
+                <select id="ddlAct" class="form-control " name="act"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Rule No</label>
+                <input id="ruleno" placeholder="Please enter rule no." name="rule_number" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">GSR/SO</label>
+                <select id="ddlGsrso"></select>
+                <input id="gsrsonumber" placeholder="Please enter rule no." />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Rule type</label>
+                <select id="ddlRuleType" class="form-control " name="rule_type"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Rule Name</label>
+                <input id="rulename" placeholder="Please enter rule no." name="rule_number" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Date</label>
+                <input placeholder="Please select date" id="rule_date" autocomplete="off" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Published In</label>
+                <select id="ddlPublishedIn" name="rule_publishedin" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Part</label>
+                <select id="ddlPart" name="act_part" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Nature</label>
+                <select class="form-control" id="ddlNature" name="act_nature"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Gazette Date</label>
+                <input placeholder="Please enter gazette date" autocomplete="off" id="gazetteDate" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Page No</label>
+                <input id="pagenumber" name="rule_pagenumber" placeholder="Please enter page no." class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Come Inforce</label>
+                <select id="ddlCominforce" name="act_cominforce" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6" id="dtComeInforse" style="display:none">
+            <div class="form-group">
+                <label class="control-label">Published Gazzet Date</label>
+                <input placeholder="Please enter gazette date" autocomplete="off" id="comeinforseDate" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <fieldset class="border p-2" style="width:100%!important">
+        <legend class="w-auto">Amended</legend>
+        <div class="row" id="divRule">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Rule Kind</label>
+                    <select id="ddlRuleKind" class="form-control" ></select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Rule</label>
+                    <select id="ddlRule" class="form-control" name="rule" style="color:blue!important;" multiple></select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2" style="width:100%!important">
+        <legend class="w-auto">Repealed</legend>
+        <div class="row" id="divRule">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Rule Kind</label>
+                    <select id="ddlRuleKind_Repealed" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Rule</label>
+                    <select id="ddlRule_Repealed" class="form-control" name="rule" style="color:blue!important;" multiple></select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Extra Act</label>
+                <input type="checkbox" id="chkExtraAct" />
+            </div>
+        </div>
+        <div class="col-md-6" id="divExtraAct" >
+            <div class="form-group">
+                <label class="control-label">Act</label>
+                <select id="ddlExtraAct" style="width:100%!important" class="form-control" multiple></select>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-info" id="btnAddBook">Add More Book..</button>
+    <div class="row">
+        <table id="tblActBook" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Year</th>
+                    <th>Volume</th>
+                    <th>Page No.</th>
+                    <th>Sr. No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><select id="ddlBook" name="act_book" class="form-control"></select></td>
+                    <td><select id="ddlBookActYear" name="book_year" class="form-control"></select></td>
+                    <td><select id="ddlBookVolume" name="volume" class="form-control"></select></td>
+                    <td><input id="book_pagenumber" name="act_pagenumber_book" placeholder="Please enter page no." class="form-control" /></td>
+                    <td><input type="number" id="book_serial_number" name="book_serial_number" placeholder="Please enter serial no." class="form-control" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pu">
+            <div class="form-group">
+                <button type="button" id="btnCopy" class="btn btn-info float-lg-right">Copy</button> &nbsp;
+                <button type="button" id="btnReset" class="btn btn-secondary float-lg-right">Reset</button> &nbsp;
+                <button type="button" id="btnSave" class="btn btn-secondary float-lg-right">Save</button>&nbsp;
+                <button type="button" id="btnRepeat" class="btn btn-info float">Repeat</button> &nbsp;
+                <button type="button" id="btnFind" class="btn btn-info float-lg-center">Find</button> &nbsp;
+            </div>
+        </div>
+    </div>
+</form>
+<div id="rulemodelpopup" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" style="min-width:80%!important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rule List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ruleList" style="height: 70vh;overflow: auto;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table cell-border" style="width:100%!important" id="tblRule" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th style="width:5% !important"></th>
+                                    <th style="width:10% !important" class="nosort">Act Type</th>
+                                    <th style="width:10% !important" class="nosort">Rule Type</th>
+                                    <th style="width:10% !important" class="nosort">Rule No</th>
+                                    <th style="width:10% !important" class="nosort">Rule Date</th>
+                                    <th style="width:55% !important">Rule Name</th>
+                                </tr>
+                            </thead>
+                            <tbody> </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input id="btnSelectRule" type="button" value="Select Act" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

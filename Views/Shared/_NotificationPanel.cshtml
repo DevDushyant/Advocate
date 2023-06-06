@@ -1,0 +1,25 @@
+﻿<script>
+
+    var msg =@(TempData["notification"]!=null?Html.Raw(TempData["notification"]):Html.Raw("undefined"));
+    if (msg) {
+        swal({
+            title: msg.title,
+            text: msg.message,
+            icon:msg.icon
+        });
+    }
+
+     var msg_confirmation =@(TempData["confirmation_notification"] !=null?Html.Raw(TempData["confirmation_notification"]):Html.Raw("undefined"));
+    if (msg_confirmation) {
+        swal({
+            title: msg_confirmation.title,
+            text: msg_confirmation.message,
+            icon: msg_confirmation.icon,
+            buttons: [
+                'No, cancel it!',
+                'Yes, I am sure!'
+            ],
+            dangerMode: true,
+        })
+    }
+</script>

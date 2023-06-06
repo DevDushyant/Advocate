@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-8"><h4>Book <b>Entry</b></h4></div>
+    <div class="col-sm-4">
+        <button type="button" onclick="location.href='@Url.Action("index", "book")'" class="btn btn-info btn-style float-lg-right"><i class="fa fa-arrow-left"></i> Back to list</button>
+    </div>
+</div>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Book</label>
+                <select id="ddlBook" name="act_book" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Year</label>
+                <select id="ddlBookActYear" name="act_year" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Book Volume</label>
+                <select id="ddlBookVolume" name="volume" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Page No.</label>
+                <input id="book_pagenumber" name="act_pagenumber_book" autocomplete="off" placeholder="Please enter page no." class="form-control" />
+            </div>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Sr. No.</label>
+                <input type="number" id="book_serial_number" name="book_serial_number" autocomplete="off" placeholder="Please enter serial no." class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Gazzete Date</label>
+                <input placeholder="Please select gazzete date" id="gazzetedate" autocomplete="off" class="form-control" />
+            </div>
+        </div> 
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Tally Data With</label>
+                <select id="ddlTallyData" class="form-control">
+                    <option></option>
+                    <option value="Act">Act</option>
+                    <option value="Notification">Notification</option>
+                    <option value="Rule">Rule</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Gazzete Date</label>
+                <input type="radio" id="rdo_gazetedate" value="gazzetedate" name="date_datetype" checked >
+
+                <label class="control-label">Notification Date</label>
+                <input type="radio" id="rdo_notification" value="notification" name="date_datetype">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Id for Act/Rule/Notification</label>
+                <select id="ddlSelectedType" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Lagislative Nature</label>
+                <select id="ddlLagislative" class="form-control">
+                    <option></option>
+                    <option value="Lagislative">Lagislative</option>
+                    <option value="SemiLagislative">Semi Lagislative</option>
+                    <option value="NonLagislative">Non Lagislative</option>
+                    <option value="Irrelevnt">Irrelevnt</option>
+                    <option value="Irrelevnt">Executive</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 pu">
+            <div class="form-group">
+                @*<button type="button" id="btnCopy" class="btn btn-info float-lg-right">Copy</button> &nbsp;*@
+                <button type="button" id="btnReset" class="btn btn-primary float">Reset</button> &nbsp;
+                <button type="button" id="btnSave" class="btn btn-primary float">Save</button>&nbsp;
+                @*<button type="button" id="btnRepeat" class="btn btn-info float">Repeat</button> &nbsp;*@
+            </div>
+        </div>
+    </div>
+
+</form>
+@section Scripts{
+    <script src="~/js/manage_bookentry.js"></script>
+}
+
+
+

@@ -1,0 +1,245 @@
+﻿@model Advocate.Dtos.RuleDetailReportDto
+
+@{
+    ViewData["Title"] = "GetRuleDetail";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+<div>
+    <h4>Rule Detail Report</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GazzetName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GazzetName)
+        </dd>
+        @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ActType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ActType)
+            </dd>*@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RuleName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RuleName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RuleNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RuleNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RuleType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RuleType)
+        </dd>
+        @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nature)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nature)
+            </dd>*@
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RuleDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RuleDate)
+        </dd>
+        @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GSRSO_Prefix)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GSRSO_Prefix)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GSRSO_No)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GSRSO_No)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GazzetDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GazzetDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PageNo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PageNo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ComeInforce)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ComeInforce)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ComeInforceEFDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ComeInforceEFDate)
+            </dd>*@
+
+    </dl>
+
+    @if (Model.RuleBookList != null)
+    {
+        <fieldset>
+            <legend>Rule Book Detail</legend>
+            <table @*style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;"*@>
+                <thead>
+                    <tr>
+                        <th style="width:5%!important">Sr.</th>
+                        <th style="width:20%!important">Name</th>
+                        <th style="width:10%!important">Year</th>
+                        <th style="width:10%!important">Volume</th>
+                        <th style="width:10%!important">Page Number</th>
+                        <th style="width:10%!important">Serial Number</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int count = 0;}
+                    @foreach (var item in Model.RuleBookList)
+                    {
+                        <tr>
+                            <td>@{ count++;}@count</td>
+                            <td>@item.BookaName</td>
+                            <td>@item.Year</td>
+                            <td>@item.Volume</td>
+                            <td>@item.PageNo</td>
+                            <td>@item.serailnumber</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+    }
+
+    @if (Model.AmendedRuleList != null)
+    {
+        <div>THE SELECTED RULE HAS AMENDED FOLLOWING RULES: </div>
+        <table @*style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;"*@>
+            <thead>
+                <tr>
+                    <th style="width:5% !important">Sr.No. </th>
+                    @*<th style="width:10% !important" class="nosort">Act Type</th>*@
+                    @*<th style="width:10% !important" class="nosort">Rule Type</th>*@
+                    <th style="width:30% !important" class="nosort">Rule No</th>
+                    <th style="width:65% !important">Rule Name</th>
+                </tr>
+            </thead>
+            <tbody @*style="height: 100px; display: inline-block; overflow: auto;"*@>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.AmendedRuleList)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>
+                        @*<td>@item.ActType</td>*@
+                        @*<td>@item.RuleType</td>*@
+                        <td>@item.RuleNo</td>
+                        <td>@item.RuleName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <br />
+    @if (Model.RepealedRuleList != null)
+    {
+        <div>SELECTED RULE HAS REPEALED FOLLOWING RULES:</div>
+        <table @*style="width:100%!important; padding-left:50px;border-block-color:coral;border-width:thin;"*@>
+            <thead>
+                <tr>
+                    <th style="width:5% !important">Sr.No. </th>
+                    @*<th style="width:10% !important" class="nosort">Act Type</th>*@
+                    @*<th style="width:10% !important" class="nosort">Rule Type</th>*@
+                    <th style="width:30% !important" class="nosort">Rule No</th>
+                    <th style="width:65% !important">Rule Name</th>
+                </tr>
+            </thead>
+            <tbody @*style="height: 100px; display: inline-block;  overflow: auto;"*@>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.RepealedRuleList)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>
+                        @*<td>@item.ActType</td>*@
+                        @*<td>@item.RuleType</td>*@
+                        <td>@item.RuleNo</td>
+                        <td>@item.RuleName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <br />
+    @if (Model.AmendedRuleBy != null)
+    {
+        <div>THE SELECTED RULE HAS SUBSEQUENTLY BEEN AMENDED BY FOLLOWING RULES:</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5% !important">Sr.No. </th>                   
+                    <th style="width:30% !important" class="nosort">Rule No</th>
+                    <th style="width:65% !important">Rule Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.AmendedRuleBy)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>                     
+                        <td>@item.RuleNo</td>
+                        <td>@item.RuleName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <br />
+    @if (Model.RepealedRuleBy != null)
+    {
+        <div>SELECTED RULE HAS BEEN REPEALED BY FOLLOWING RULE:</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5% !important">Sr.No. </th>                  
+                    <th style="width:30% !important" class="nosort">Rule No</th>
+                    <th style="width:65% !important">Rule Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int actcount = 0;}
+                @foreach (var item in Model.RepealedRuleBy)
+                {
+                    <tr>
+                        <td>@{ actcount++;}@actcount</td>                      
+                        <td>@item.RuleNo</td>
+                        <td>@item.RuleName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

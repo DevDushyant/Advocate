@@ -1,0 +1,248 @@
+﻿<form id="frm_notification">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act type</label>
+                <select id="ddlActType" class="form-control" autofocus  name="acttype"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Act</label>
+                <select id="ddlAct" class="form-control"  name="act"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Notification No</label>
+                <input id="notificationNo" placeholder="Please enter notification no." name="notification_number" autocomplete="off" autofocus  class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">GSR/SO</label>
+            <select id="ddlGsrso" ></select>
+            <input id="gsrsonumber"  placeholder="Please enter gsr/so no." />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Notification Date</label>
+                <input placeholder="Please select notification date" id="notification_date" autocomplete="off" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Under Section Rule</label>
+                <input id="underSectionRule" placeholder="Please enter under section rule." name="undersection_rule" autocomplete="off" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Rule Kind</label>
+                <select id="ddlRuleKind" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Rule</label>
+                <select id="ddlRule" class="form-control" name="rule"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Published In</label>
+                <select id="ddlPublishedIn" name="rule_publishedin" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Part</label>
+                <select id="ddlPart" name="act_part" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Nature</label>
+                <select class="form-control" id="ddlNature" name="act_nature"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Gazette Date</label>
+                <input placeholder="Please enter gazette date" autocomplete="off" id="gazetteDate" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Notification Type</label>
+                <select id="ddlNotificationType" class="form-control" name="notification"></select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Page No</label>
+                <input id="pagenumber" name="rule_pagenumber" placeholder="Please enter page no." class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Come Inforce</label>
+                <select id="ddlCominforce" name="act_cominforce" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-6" id="dtComeInforse" style="display:none">
+            <div class="form-group">
+                <label class="control-label">Published Gazzet Date</label>
+                <input placeholder="Please enter gazette date" autocomplete="off" id="comeinforseDate" class="form-control" />
+            </div>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="dtComeInforse">
+            <div class="form-group">
+                <label class="control-label">Substance</label>
+                <textarea  placeholder="Please enter substance" autocomplete="off" id="substance" class="form-control"></textarea>              
+            </div>
+        </div>
+    </div>  
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Extra Act</label>
+                <input type="checkbox" id="chkExtraAct" />
+            </div>
+        </div>
+        <div class="col-md-6" id="divExtraAct">
+            <div class="form-group">
+                <label class="control-label">Act</label>
+                <select id="ddlExtraAct" style="width:100%!important" class="form-control" multiple></select>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-info" id="btnAddBook">Add More Book..</button>
+    <div class="row">
+        <table id="tblActBook" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Year</th>
+                    <th>Volume</th>
+                    <th>Page No.</th>
+                    <th>Sr. No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><select id="ddlBook" name="act_book" class="form-control"></select></td>
+                    <td><select id="ddlBookActYear" name="book_year" class="form-control"></select></td>
+                    <td><select id="ddlBookVolume" name="volume" class="form-control"></select></td>
+                    <td><input type="text" id="book_pagenumber" name="act_pagenumber_book" placeholder="Please enter page no." class="form-control" /></td>
+                    <td><input type="number" id="book_serial_number" name="book_serial_number" placeholder="Please enter serial no." class="form-control" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pu">
+            <div class="form-group">
+                <button type="button" id="btnRepealed" class="btn btn-info float">Repealed</button> &nbsp;
+                <button type="button" id="btnAmended" class="btn btn-info float">Amended</button> &nbsp;
+                <button type="button" id="btnRepeat" class="btn btn-info float">Repeat</button> &nbsp;
+                <button type="button" id="btnFind" class="btn btn-info float ">Find</button> &nbsp;
+                <button type="button" id="btnSave" class="btn btn-info float">Save</button>&nbsp;
+                <button type="button" id="btnCopy" class="btn btn-info float">Copy</button> &nbsp;
+                <button type="button" id="btnReset" class="btn btn-info">Reset</button> &nbsp;
+            </div>
+        </div>
+    </div>
+</form>
+<div id="acttypmodelpopup" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" style="min-width:80%!important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Notification List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="actlist" style="height: 70vh;overflow: auto;">
+                <div class="row">
+                    <div class="col-md-9 first-column">
+                        <partial name="~/Views/Shared/_NotificationList.cshtml" />
+                    </div>
+                    <div class="col-md-3 second-column">
+                        Selected Notification List
+                        <hr />
+                        <table id="actList">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input id="btnSelectAct" type="button" value="Select Act" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="rulemodelpopup" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" style="min-width:80%!important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Notification List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ruleList" style="height: 70vh;overflow: auto;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table cell-border" style="width:100%!important" id="tblRule" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th style="width:5% !important"></th>
+                                    <th style="width:10% !important">Notification Type</th>
+                                    <th style="width:10% !important">Rule</th>
+                                    <th style="width:10% !important">Notification Name</th>
+                                    <th style="width:45% !important">Notification No.</th>
+                                    <th style="width:45% !important">Notification Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input id="btnSelectRule" type="button" value="Select Act" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>*@

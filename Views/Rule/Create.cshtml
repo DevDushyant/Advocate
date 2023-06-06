@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Create Rule";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-8"><h4><label id="lblFormHeading"></label>  <b>Rule</b></h4></div>
+    <div class="col-sm-4">
+        <button type="button" onclick="location.href='@Url.Action("index", "rule")'" class="btn btn-info btn-style float-lg-right"><i class="fa fa-arrow-left"></i> Back to list</button>
+    </div>
+</div>
+<hr />
+<input type="hidden" id="hdnScreenType" value="@ViewBag.Screen" />
+<partial name="~/Views/Shared/_ManageRule.cshtml" />
+
+@section Scripts{
+    <script src="~/js/manage_rule.js"></script>
+}

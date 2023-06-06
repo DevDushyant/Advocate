@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Advocate.Models.ActTypeViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-8"><h4>Act Type <b>List</b></h4></div>
+    <div class="col-sm-4">
+        <button type="button" onclick="location.href='@Url.Action("create", "acttype")'" class="btn btn-info btn-style float-lg-right"><i class="fa fa-plus"></i> Add New</button>
+    </div>
+</div>
+<hr />
+<table class="table acttypetable">
+    <thead>
+        <tr>
+            <th>
+                Sr.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int sno = 0; }
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @{ sno++; } @sno
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+                <a class="edit" asp-action="Edit" asp-route-id="@item.Id" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                <a class="detail" asp-action="Details" asp-route-id="@item.Id" title="Detail" data-toggle="tooltip"><i class="material-icons">description</i></a>
+                <a class="delete" onclick="deleteRecord('@item.Id')" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".acttypetable").dataTable({
+
+            });
+        });
+    deleteRecord = function (id) {
+    $.ajax({
+        type: "POST",
+        url: "@Url.Action("Delete","acttype")",
+        data: { id: id },
+        success: function (data) {
+            if (data == true) {
+                Swal.fire('Delete the record successfully!')
+            }
+            location.reload(true);
+        }
+    });
+   }  
+    </script>
+}
+
+
+

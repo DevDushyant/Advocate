@@ -1,0 +1,62 @@
+﻿<style>
+    #ddlactTypeFilter select.form-control {
+        display: inline;
+        width: 200px;
+        margin-left: 25px;
+    }
+
+    .split {
+        height: 80%;
+        width: 80%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .left {
+        left: 0;
+        background-color: #111;
+    }
+
+    .right {
+        right: 0;
+        background-color: red;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+
+
+<table class="table acttypetable" id="tblActTable">
+    <thead>
+        <tr>
+            <th style="width:5% !important"></th>
+            <th style="width:10% !important">Notification Type</th>
+            <th style="width:10% !important">Rule</th>
+            @*<th style="width:10% !important">Notification Name</th>*@
+            <th style="width:45% !important">Notification No.</th>
+            <th style="width:45% !important">Notification Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @ViewBag.Act)
+        {
+        <tr>
+            <td><input type="checkbox" id="chk_@item.Id" class="chkall"><input type="hidden" value="@item.Id"></td>
+            <td>@item.NotificationType</td>
+            <td>@item.Rule</td>
+            <td>@item.NotificationNo</td>
+            <td>@item.NotificationDate</td>
+        </tr>
+        }
+    </tbody>
+</table>
+

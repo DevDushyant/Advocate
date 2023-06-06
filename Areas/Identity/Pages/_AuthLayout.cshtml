@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "/Views/Shared/_layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Login">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Register">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+<script>
+    var current = location.pathname;
+    $('.nav-tabs li a').each(function () {
+        var $this = $(this);
+        if (current.indexOf($this.attr('href')) !== -1) {
+            $this.addClass('active');
+        }
+    });
+</script>
+}

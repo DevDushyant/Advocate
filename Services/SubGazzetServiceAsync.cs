@@ -19,7 +19,7 @@ namespace Advocate.Services
 
         public IEnumerable<PartEntity> GetAllPartsWithGazette(string userid)
         {
-            var result = advocateContext.PartEntities.Where(u=>u.UserID==userid && u.IsActive==true)  //main table
+            var result = advocateContext.PartEntities.Where(u=> u.IsActive==true)  //main table
                         .Join(advocateContext.gazetteTypeEntities,  //inner join table
                         gId => gId.GazettId,   // inner join condition
                         sgg => sgg.Id,   //outer joint condition

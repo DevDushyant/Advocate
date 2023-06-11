@@ -30,7 +30,7 @@ namespace Advocate
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+
             services.AddDbContext<AdvocateContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DbConnection")));
@@ -48,9 +48,14 @@ namespace Advocate
             services.AddTransient<IRuleServiceAsync, RuleServiceAsync>();
             services.AddTransient<INotifcationTypeAsyncService, NotificationTypeServiceAsync>();
             services.AddTransient<INotificationServiceAsync, NotificationServiceAsync>();
-            services.AddRazorPages();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddAuthorization(options=> {
+			services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+			services.AddRazorPages();
+            services.AddControllersWithViews().AddRazorPagesOptions(options => {
+                options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
+            });
+
+            services.AddAuthorization(options =>
+            {
                 options.AddPolicy("managerole", policy => policy.RequireRole("Super Admin"));
                 options.AddPolicy("managemenu", policy => policy.RequireRole("Super Admin"));
             });

@@ -33,11 +33,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Npgsql" Version="5.0.16" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+    <PackageReference Include="sautinsoft.pdffocus" Version="2023.5.10" />
     <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="19.2.0.62" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\documents\act\" />
+    <Folder Include="wwwroot\upload\" />
   </ItemGroup>
 
   <ItemGroup>

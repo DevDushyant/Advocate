@@ -116,5 +116,15 @@ namespace Advocate.Common
             };
             return _volumeDictionary;
         }
-    }
+
+		public static Dictionary<string, string> DataToolType()
+		{
+			var _RDictionary = new Dictionary<string, string>
+			{
+				{ "EGZT", "E-Gazzet" },
+				{ "RGZT", "Rajasthan" }
+			};
+			return _RDictionary;
+		}
+	}
 }

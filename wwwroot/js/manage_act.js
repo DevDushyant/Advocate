@@ -3,7 +3,7 @@ var selecteactids = [];
 var accesstype = "", actid;
 var buttonType = "";
 $(document).ready(function () {
-    $("#lblRepealedInfo").append(localStorage.getItem("repealedAct").replace(/['"]+/g, ''));
+    //$("#lblRepealedInfo").append(localStorage.getItem("repealedAct").replace(/['"]+/g, ''));
     $("#gazetteDate").datepicker();
     $("#assentdate").datepicker();
     BindActType('ddlActType');

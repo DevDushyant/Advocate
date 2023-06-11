@@ -252,7 +252,7 @@ namespace Advocate.Services
         public ActDetailDescriptionDto GetActDetailInfoByActId(string userid, int Id)
         {
             var data = (
-                        from actdata in advocateContext.ActEntities.Where(act => act.Id == Id && act.IsActive == true && act.UserID == userid)
+                        from actdata in advocateContext.ActEntities.Where(act => act.Id == Id && act.IsActive == true )
                         join actType in advocateContext.ActTyes.Where(p => p.IsActive == true) on actdata.ActTypeId equals actType.Id into actType
                         from type in actType.DefaultIfEmpty()
 
@@ -298,7 +298,7 @@ namespace Advocate.Services
 
                         }
                         );
-            var actualData = data;
+         
             ActDetailDescriptionDto actEntity = new ActDetailDescriptionDto();
             actEntity = data.FirstOrDefault();
             if (actEntity.Subjects != null && actEntity.Subjects != "")

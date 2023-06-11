@@ -156,5 +156,12 @@ namespace Advocate.Controllers
             var notTypeItem = notifcationTypeAsyncService.GetAllAsync();
             return Json(new SelectList(notTypeItem, "Id", "Name"));
         }
-    }
+
+		[HttpGet]
+		[Route("ddl-data-ext-type")]
+		public JsonResult GetFileType()
+		{
+			return Json(new SelectList(StaticDropDownDictionaries.DataToolType(), "Key", "Value"));
+		}
+	}
 }

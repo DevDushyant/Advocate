@@ -370,3 +370,27 @@ BindNotificationType = function (dropdownId) {
         }
     });
 }
+
+BindFileType = function (dropdownId) {
+    $.ajax({
+        type: "GET",
+        url: "/ddl-data-ext-type",
+        dataType: "json",
+        beforeSend: function () {
+            $("#loader").show()
+        },
+        async: false,
+        success: function (responce) {
+            $("#" + dropdownId).empty();
+            $("#" + dropdownId).append($("<option></option>"));
+            $.each(responce, function (data, value) {
+                $("#" + dropdownId).append($("<option></option>").val(value.value).html(value.text));
+            });
+            $("#" + dropdownId).select2({
+                placeholder: "Select File Type",
+                allowClear: true
+            });
+            $("#loader").hide();
+        }
+    });
+}

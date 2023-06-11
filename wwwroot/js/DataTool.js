@@ -34,7 +34,7 @@
 $("#btnUpload").on('click', function () {
     var filetype = $("#ddlFileType").val();
     var files = $('#fileUpload').prop("files");
-    var url = "tool/OnPostMyUploader?handler=MyUploader&FileType=" + filetype +"";
+    var url = "tool/OnPostMyUploader?handler=MyUploader&FileType=" + filetype + "";
     formData = new FormData();
     formData.append("MyUploader", files[0]);
 
@@ -55,6 +55,20 @@ $("#btnUpload").on('click', function () {
             }
         },
         error: function () {
+            alert("Error occurs");
+        }
+    });
+});
+$("#btnScrapData").click(function () {
+    jQuery.ajax({
+        type: 'GET',
+        url: "tool/ScrapData?url=" + $("#txtUrl").val() + "",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        }, success: function (repo) {
+
+        }, error: function () {
             alert("Error occurs");
         }
     });

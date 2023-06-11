@@ -2,6 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using AngleSharp;
+using AngleSharp.Html.Parser;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 
 namespace Advocate.Controllers
 {
@@ -61,6 +67,25 @@ namespace Advocate.Controllers
 			if (f.PageCount > 0)
 				excel = f.ToExcel();
 			return excel;
+			
+		}
+
+		public  Task<IActionResult> ScrapDataAsync(string url)
+		{
+			var data =GetPageDataAsync(url);
+			return null;
+		}
+
+		private async Task<List<dynamic>> GetPageDataAsync(string url)
+		{
+			// Load default configuration
+			var config = Configuration.Default.WithDefaultLoader();
+			// Create a new browsing context
+			var context = BrowsingContext.New(config);
+			// This is where the HTTP request happens, returns <IDocument> that // we can query later
+			var document = await context.OpenAsync(url);
+			var tableData = document.QuerySelectorAll("table").Select(s=>s.InnerHtml);
+			return (List<dynamic>)tableData;
 			
 		}
 	}

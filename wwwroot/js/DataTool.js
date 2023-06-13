@@ -32,11 +32,12 @@
 
 // If you want to upload file on button click, then use below button click event
 $("#btnUpload").on('click', function () {
+    debugger;
     var filetype = $("#ddlFileType").val();
     var files = $('#fileUpload').prop("files");
-    var url = "tool/OnPostMyUploader?handler=MyUploader&FileType=" + filetype + "";
+    var url = "tool/OnPostMyUploader?handler=FileUpload&FileType=" + filetype + "";
     formData = new FormData();
-    formData.append("MyUploader", files[0]);
+    formData.append("FileUpload", files[0]);
 
     jQuery.ajax({
         type: 'POST',

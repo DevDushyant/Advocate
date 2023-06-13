@@ -48,6 +48,7 @@ namespace Advocate
             services.AddTransient<IRuleServiceAsync, RuleServiceAsync>();
             services.AddTransient<INotifcationTypeAsyncService, NotificationTypeServiceAsync>();
             services.AddTransient<INotificationServiceAsync, NotificationServiceAsync>();
+			services.AddTransient<IEGazzetDataServiceAsync, EGazzetDataService>();
 			services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 			services.AddRazorPages();
             services.AddControllersWithViews().AddRazorPagesOptions(options => {

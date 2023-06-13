@@ -54,6 +54,8 @@ namespace Advocate
                 options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
             });
 
+
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("managerole", policy => policy.RequireRole("Super Admin"));

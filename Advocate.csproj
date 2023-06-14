@@ -12,12 +12,14 @@
     <Compile Remove="Data\PgMigration\20230606132829_first.Designer.cs" />
     <Compile Remove="Data\PgMigration\20230606133101_first.cs" />
     <Compile Remove="Data\PgMigration\20230606133101_first.Designer.cs" />
+    <Compile Remove="Data\PgMigration\20230614163713_Excel-Upload.cs" />
+    <Compile Remove="Data\PgMigration\20230614163713_Excel-Upload.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.0.3" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.13.1" />
+    <PackageReference Include="EPPlus" Version="6.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
@@ -36,9 +38,6 @@
     <PackageReference Include="Npgsql.Bulk" Version="0.10.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
     <PackageReference Include="sautinsoft.pdffocus" Version="2023.5.10" />
-    <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="19.2.0.62" />
-    <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="21.2.10" />
-    <PackageReference Include="System.Data.OleDb" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

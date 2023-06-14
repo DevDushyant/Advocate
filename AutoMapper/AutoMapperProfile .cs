@@ -55,7 +55,7 @@ namespace Advocate.AutoMapper
 				 .ForMember(source => source.GazetteDate, opt => opt.MapFrom(src => src.GazetteDate))
 				.ReverseMap();
 
-			CreateMap<List<EGazzetDataEntity>, List<GazzetDataDto>>().ReverseMap();
+			CreateMap<GazzetDataDto, EGazzetDataEntity>().ReverseMap();
 
 		}
 	}

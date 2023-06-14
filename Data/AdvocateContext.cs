@@ -34,6 +34,7 @@ namespace Advocate.Data
         public DbSet<NotificationBookEntity> NotificationBookEntities { get; set; }
         public DbSet<NotificationExtActEntity> NotificationExtActEntities { get; set; }
         public DbSet<BookEntryDetailEntity> BookEntryDetailEntities { get; set; }
+        public DbSet<EGazzetDataEntity> EGazzetDataEntities { get; set; }
 
         public AdvocateContext(DbContextOptions<AdvocateContext> options)
             : base(options)

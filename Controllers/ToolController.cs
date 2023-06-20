@@ -10,6 +10,9 @@ using Advocate.Entities;
 using Advocate.Interfaces;
 using OfficeOpenXml;
 using System;
+using System.IO;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
+using System.Net;
 
 namespace Advocate.Controllers
 {
@@ -73,8 +76,9 @@ namespace Advocate.Controllers
                     }
                 }
                 List<GazzetDataDto> gazzetList = new List<GazzetDataDto>();
+                ExtractEGazzetFiles(table);
 
-                gazzetList = (from DataRow dr in table.Rows
+				gazzetList = (from DataRow dr in table.Rows
                               select new GazzetDataDto()
                               {
                                   gazzetTypeId = 1,
@@ -87,8 +91,9 @@ namespace Advocate.Controllers
                                   issue_date = dr["issue_date"].ToString(),
                                   publish_date = dr["publish_date"].ToString(),
                                   reference_no = dr["reference_no"].ToString(),
-                                  file_size = dr["file_size"].ToString()
-                              }).ToList();
+                                  file_size = dr["file_size"].ToString(),
+                                  file_name= dr["reference_no"].ToString().Split("-").Length !=1? dr["reference_no"].ToString().Split("-")[4]+".pdf": dr["reference_no"].ToString().Split("-")[0]
+							  }).ToList();
                 var mapEntity = _mapper.Map<List<GazzetDataDto>, List<EGazzetDataEntity>>(gazzetList);
                 var uploadedData = iEGazzetData.BulkUpload(mapEntity);
             }
@@ -99,50 +104,51 @@ namespace Advocate.Controllers
             return null;
         }
 
+        private bool ExtractEGazzetFiles(DataTable eGazzet)
+        {
 
-		private byte[] PdfToExcel(IFormFile MyUploader)
-		{
-			byte[] excel = null;
-			// Activate your license here
-			// SautinSoft.PdfFocus.SetLicense("1234567890");
-			SautinSoft.PdfFocus f = new SautinSoft.PdfFocus();
+			bool bFlag = false;
+            if (eGazzet != null)
+            {
+				int eIndex = 0, iCount = 0;
+				string strUGID = string.Empty, strSourcePath = string.Empty, strDestPath = string.Empty;
+				foreach (DataRow drData in eGazzet.Rows)
+				{
+					 strUGID = drData["reference_no"].ToString();    //strUGID = drData["Gazette ID"].ToString();
+					strUGID = strUGID.Replace("\n", String.Empty);
 
-			f.ExcelOptions.ConvertNonTabularDataToSpreadsheet = false;
+					if (strUGID.Contains("-"))
+					{
+						using (WebClient client = new WebClient())
+						{
+							//strItem = "CG-DL-E-22022021-225323";
+							eIndex = strUGID.LastIndexOf("-");
+							strSourcePath = "https://egazette.gov.in/WriteReadData/" + strUGID.Substring(eIndex - 4).Replace("-", "/") + ".pdf";
+                            //strDestPath = appPath + @"\Files\Gazzets\" + strUGID.Substring(eIndex - 4, 4);
+                            string fileName = strUGID.Substring(eIndex - 4).Replace("-", "/") + ".pdf";
+							string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "upload", strUGID.Substring(eIndex - 4, 4));
+							bool isExist = Directory.Exists(uploadsFolder);
+							if (!isExist)
+								Directory.CreateDirectory(uploadsFolder);
 
-			// 'true'  = Preserve original page layout.
-			// 'false' = Place tables before text.
-			f.ExcelOptions.PreservePageLayout = true;
+							try
+							{
+								client.DownloadFile(strSourcePath, fileName);
+                                client.
+								//drData["FilePath"] = strDestPath;
+							}
+							catch (Exception)
+							{
+								continue;
+							}
+						}
 
-			// The information includes the names for the culture, the writing system, 
-			// the calendar used, the sort order of strings, and formatting for dates and numbers.
-			System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("en-US");
-			ci.NumberFormat.NumberDecimalSeparator = ",";
-			ci.NumberFormat.NumberGroupSeparator = ".";
-			f.ExcelOptions.CultureInfo = ci;
-
-			if (f.PageCount > 0)
-				excel = f.ToExcel();
-			return excel;
-
+						iCount++;
+					}
+				}
+				
+			}
+            return bFlag;
 		}
-
-		//public Task<IActionResult> ScrapDataAsync(string url)
-		//{
-		//	var data = GetPageDataAsync(url);
-		//	return null;
-		//}
-
-		//private async Task<List<dynamic>> GetPageDataAsync(string url)
-		//{
-		//	// Load default configuration
-		//	var config = Configuration.Default.WithDefaultLoader();
-		//	// Create a new browsing context
-		//	var context = BrowsingContext.New(config);
-		//	// This is where the HTTP request happens, returns <IDocument> that // we can query later
-		//	var document = await context.OpenAsync(url);
-		//	var tableData = document.QuerySelectorAll("table").Select(s => s.InnerHtml);
-		//	return (List<dynamic>)tableData;
-
-		//}
 	}
 }

@@ -12,6 +12,7 @@
 		public string issue_date { get; set; }
 		public string publish_date { get; set; }
 		public string reference_no { get; set; }
-		public string file_size { get; set; }
+		public string file_size { get; set; }	
+		public string file_name { get; set; }
 	}
 }

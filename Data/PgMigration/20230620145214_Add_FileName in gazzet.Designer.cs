@@ -3,15 +3,17 @@ using System;
 using Advocate.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Advocate.Data.PgMigration
 {
     [DbContext(typeof(AdvocateContext))]
-    partial class AdvocateContextModelSnapshot : ModelSnapshot
+    [Migration("20230620145214_Add_FileName in gazzet")]
+    partial class Add_FileNameingazzet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

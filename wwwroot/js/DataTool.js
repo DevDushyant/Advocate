@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     BindFileType("ddlFileType");
 });
-
+//$("#loader").show()
 //$("#fileUpload").on('change', function () {
 //    var files = $('#fileUpload').prop("files");
 //    var url = "tool/OnPostMyUploader?handler=MyUploader";
@@ -47,6 +47,7 @@ $("#btnUpload").on('click', function () {
         contentType: false,
         processData: false,
         beforeSend: function (xhr) {
+            $("#loader").show();
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },

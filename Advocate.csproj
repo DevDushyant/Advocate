@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\documents\act\" />
-    <Folder Include="wwwroot\upload\" />
+    <Folder Include="wwwroot\upload\2022\" />
   </ItemGroup>
 
   <ItemGroup>

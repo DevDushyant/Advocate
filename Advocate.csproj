@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Advocate-CB9D74E1-65C5-48C1-89D1-6F54978BA6FD</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\PgMigration\20230606132535_first.cs" />
+    <Compile Remove="Data\PgMigration\20230606132535_first.Designer.cs" />
+    <Compile Remove="Data\PgMigration\20230606132829_first.cs" />
+    <Compile Remove="Data\PgMigration\20230606132829_first.Designer.cs" />
+    <Compile Remove="Data\PgMigration\20230606133101_first.cs" />
+    <Compile Remove="Data\PgMigration\20230606133101_first.Designer.cs" />
+    <Compile Remove="Data\PgMigration\20230614163713_Excel-Upload.cs" />
+    <Compile Remove="Data\PgMigration\20230614163713_Excel-Upload.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.13.1" />
+    <PackageReference Include="EPPlus" Version="6.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Npgsql" Version="5.0.16" />
+    <PackageReference Include="Npgsql.Bulk" Version="0.10.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+    <PackageReference Include="sautinsoft.pdffocus" Version="2023.5.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\documents\act\" />
+    <Folder Include="wwwroot\upload\2022\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\templates\act\act.outline" />
+    <None Include="wwwroot\templates\act\compatibility.min.js" />
+    <None Include="wwwroot\templates\act\p1fg9dp64i1ogtnpc1bci7hd3as4.pdf" />
+    <None Include="wwwroot\templates\act\theViewer.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Word">
+      <HintPath>C:\Users\Admin\Downloads\Microsoft.Office.Interop.Word\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

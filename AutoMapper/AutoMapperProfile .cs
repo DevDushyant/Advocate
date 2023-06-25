@@ -57,6 +57,8 @@ namespace Advocate.AutoMapper
 
 			CreateMap<GazzetDataDto, EGazzetDataEntity>().ReverseMap();
 
+			
+
 		}
 	}
 }

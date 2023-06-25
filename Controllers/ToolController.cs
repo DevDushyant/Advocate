@@ -13,6 +13,7 @@ using System;
 using System.IO;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using System.Net;
+using System.Globalization;
 
 namespace Advocate.Controllers
 {
@@ -53,18 +54,28 @@ namespace Advocate.Controllers
                             {
                                 int noOfCol = workSheet.Dimension.End.Column;
                                 int noOfRow = workSheet.Dimension.End.Row;
-                                int rowIndex = 1;
-                                for (int c = 1; c <= noOfCol; c++)
+                                int rowIndex = 1;                               
+								for (int c = 1; c <= noOfCol; c++)
                                 {
                                     table.Columns.Add(workSheet.Cells[rowIndex, c].Text);
+                                    
                                 }
                                 rowIndex = 2;
                                 for (int r = rowIndex; r <= noOfRow; r++)
                                 {
                                     DataRow dr = table.NewRow();
                                     for (int c = 1; c <= noOfCol; c++)
-                                    {
-                                        dr[c - 1] = workSheet.Cells[r, c].Value;
+                                    {                                        
+
+										if (c == 7 || c == 8)
+                                        {
+                                            long dt = long.Parse(workSheet.Cells[r, c].Value.ToString());
+                                            DateTime dtt = DateTime.FromOADate(dt);											
+											var formatted = dtt.ToString("yyyy-MM-dd");
+											dr[c - 1] = formatted;
+                                        }
+                                        else
+                                            dr[c - 1] = workSheet.Cells[r, c].Value;
                                     }
                                     table.Rows.Add(dr);
                                 }
@@ -129,7 +140,6 @@ namespace Advocate.Controllers
                             eIndex = strUGID.LastIndexOf("-");
                             strSourcePath = "https://egazette.gov.in/WriteReadData/" + strUGID.Substring(eIndex - 4).Replace("-", "/") + ".pdf";
                             //strDestPath = appPath + @"\Files\Gazzets\" + strUGID.Substring(eIndex - 4, 4);
-
                             string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "upload\\" + fileType, strUGID.Substring(eIndex - 4, 4));
                             bool isExist = Directory.Exists(uploadsFolder);
                             if (!isExist)
@@ -137,9 +147,7 @@ namespace Advocate.Controllers
                             string filePath = uploadsFolder + "\\" + strUGID.Substring(eIndex + 1).Replace("-", "/") + ".pdf";
                             try
                             {
-                                client.DownloadFile(strSourcePath, filePath);
-                                if(iCount==5)
-                                    return true;
+                                client.DownloadFile(strSourcePath, filePath);                              
                             }
                             catch (Exception)
                             {
@@ -149,6 +157,7 @@ namespace Advocate.Controllers
                         iCount++;
                     }
                 }
+				bFlag= true;
             }
             return bFlag;
         }

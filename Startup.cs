@@ -55,7 +55,7 @@ namespace Advocate
                 options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
             });
 
-
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddAuthorization(options =>
             {

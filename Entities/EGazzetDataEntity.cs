@@ -5,8 +5,8 @@ namespace Advocate.Entities
 	[Table("Mst_GazetteData")]
 	public class EGazzetDataEntity : BaseEntity
 	{
-		[ForeignKey("GazzetTypeId")]
-		public GazetteTypeEntity gazetteType { get; set; }
+		
+		public int gazzetTypeId { get; set; }
 		public string oraganization { get; set; }
 		public string department { get; set; }
 		public string office { get; set; }

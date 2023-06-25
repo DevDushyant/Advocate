@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Gazzet Data ";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-8"><h4>Gazzet Data <b>List</b></h4></div>
+    @*<div class="col-sm-4">
+        <button type="button" onclick="location.href='@Url.Action("create", "Gazette")'" class="btn btn-info btn-style float-lg-right"><i class="fa fa-plus"></i> Add New</button>
+    </div>*@
+</div>
+<hr />
+<div class="row">
+    <div class="col-lg-12">
+        <partial name="~/Views/Shared/_GazzetSearchPartial.cshtml" />
+    </div>  
+</div>

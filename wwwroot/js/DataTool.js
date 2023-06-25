@@ -32,7 +32,7 @@
 
 // If you want to upload file on button click, then use below button click event
 $("#btnUpload").on('click', function () {
-    debugger;
+  
     var filetype = $("#ddlFileType").val();
     var files = $('#fileUpload').prop("files");
     var url = "tool/OnPostMyUploader?handler=FileUpload&FileType=" + filetype + "";
@@ -52,6 +52,7 @@ $("#btnUpload").on('click', function () {
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         success: function (repo) {
+            $("#loader").hide();
             if (repo.status == "success") {
                 alert("File : " + repo.filename + " is uploaded successfully");
             }

@@ -56,10 +56,10 @@ namespace Advocate.AutoMapper
 				.ReverseMap();
 
 			CreateMap<GazzetDataDto, EGazzetDataEntity>().ReverseMap();
+            CreateMap<EGazzetSearchDto, GazzetSearchViewModel>().ReverseMap();
 
-			
 
-		}
+        }
 	}
 }
 

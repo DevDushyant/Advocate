@@ -4,13 +4,67 @@
 }
 <div class="row">
     <div class="col-sm-8"><h4>Gazzet Data <b>List</b></h4></div>
-    @*<div class="col-sm-4">
-        <button type="button" onclick="location.href='@Url.Action("create", "Gazette")'" class="btn btn-info btn-style float-lg-right"><i class="fa fa-plus"></i> Add New</button>
-    </div>*@
 </div>
 <hr />
 <div class="row">
     <div class="col-lg-12">
         <partial name="~/Views/Shared/_GazzetSearchPartial.cshtml" />
-    </div>  
+    </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="col-sm-12" style="padding:20px">
+               
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            debugger;
+            $("#GNatureId").select2({
+                placeholder: "Select Nature",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#GazzetId").select2({
+                placeholder: "Select Type",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#PartId").select2({
+                placeholder: "Select Part",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#Year").select2({
+                placeholder: "Select Year",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#DepartmentId").select2({
+                placeholder: "Select Department",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+
+
+        });
+        function loadData() {
+            $('#viewAll').load('/Litigation/CaseTracking/LoadAll');
+        }
+    </script>
+}

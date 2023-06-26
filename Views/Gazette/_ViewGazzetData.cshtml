@@ -1,0 +1,51 @@
+﻿@model List<Advocate.Dtos.GazzetDataDto>
+<table id="tblEGazzet" class="table table-striped" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Sno.</th>
+            <th>Organization</th>
+            <th>Subject</th>
+            <th>Issue Date</th>
+            <th>Publish Date</th>
+            <th>Reference No</th>
+            <th>File Size</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var bt in Model)
+        {
+            <tr>
+                <td>
+                    @count++;
+                </td>
+                <td>
+                    @bt.oraganization
+                </td>
+                <td>
+                    @bt.subject
+                </td>
+                <td>
+                    @bt.issue_date
+                </td>
+                <td>
+                    @bt.publish_date
+                </td>
+                <td>
+                    @bt.reference_no
+                </td>
+                <td>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $("#brandTable").DataTable();
+    });
+</script>

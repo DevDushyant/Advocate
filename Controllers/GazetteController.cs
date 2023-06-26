@@ -1,9 +1,12 @@
 ﻿using Advocate.Common;
+using Advocate.Dtos;
 using Advocate.Entities;
 using Advocate.Interfaces;
 using Advocate.Models;
+using Advocate.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,14 +18,18 @@ namespace Advocate.Controllers
 	public class GazetteController : BaseController
 	{
 		private readonly IGazzetServiceAsync gazzetServiceAsync;
-		private readonly ILogger<NavigationController> _logger;
+		private readonly IEGazzetDataServiceAsync _eGazzetService;
+        private readonly ISubGazzetServiceAsync subGazzetServiceAsync;
+        private readonly ILogger<NavigationController> _logger;
 		private readonly IMapper _mapper;
 
-		public GazetteController(IGazzetServiceAsync gazzetServiceAsync, ILogger<NavigationController> _logger, IMapper _mapper)
+		public GazetteController(IGazzetServiceAsync gazzetServiceAsync, ISubGazzetServiceAsync subGazzetServiceAsync, IEGazzetDataServiceAsync _eGazzetService, ILogger<NavigationController> _logger, IMapper _mapper)
 		{
 			this.gazzetServiceAsync = gazzetServiceAsync;
 			this._logger = _logger;
 			this._mapper = _mapper;
+			this.subGazzetServiceAsync = subGazzetServiceAsync;
+			this._eGazzetService = _eGazzetService;
 
 		}
 		public IActionResult Index()
@@ -33,10 +40,30 @@ namespace Advocate.Controllers
 
 		public IActionResult Gdata()
 		{
-			return View();
+			GazzetSearchViewModel viewModel = new GazzetSearchViewModel();
+            var gztViewModel = _mapper.Map<IEnumerable<GazetteTypeEntity>, IEnumerable<GazetteViewModel>>(gazzetServiceAsync.GetAllAsync());
+			var LstPart = _eGazzetService.GetPart();
+			var LstCategory = _eGazzetService.GetCategory();
+            var LstDepartment = _eGazzetService.GetDeaprtmentDataList();
+            viewModel.LstNature = new SelectList(LstCategory, nameof(DdlDto.value), nameof(DdlDto.text), null, null);
+            viewModel.LstYear = new SelectList(StaticDropDownDictionaries.YearDictionary(), "Key", "Value");
+            viewModel.LstGazzets= new SelectList(gztViewModel, nameof(GazetteViewModel.Id), nameof(GazetteViewModel.GazetteName), null, null);
+            viewModel.LstParts = new SelectList(LstPart, nameof(DdlDto.value), nameof(DdlDto.text), null, null);
+            viewModel.LstDepartment= new SelectList(LstDepartment, nameof(DdlDto.value), nameof(DdlDto.text), null, null);
+            return View(viewModel);
 		}
 
-		public IActionResult Create()
+		[HttpPost]
+		public IActionResult SearchEGazzet(GazzetSearchViewModel search)
+		{
+			var searchViewModel = _mapper.Map<GazzetSearchViewModel,EGazzetSearchDto>(search);
+			var EGztData = _eGazzetService.EGazzetData(searchViewModel);
+			var result = _mapper.Map<List<EGazzetDataEntity>, List<GazzetDataDto>>(EGztData);
+			return PartialView("_ViewGazzetData", result);
+		}
+
+
+        public IActionResult Create()
 		{
 			return View();
 		}

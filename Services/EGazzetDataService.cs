@@ -47,8 +47,9 @@ namespace Advocate.Services
                 predicate.And(p => p.part_section.Equals(param.part_section));
 
             var result = dbContext.EGazzetDataEntities.AsNoTracking().AsExpandable();
-            result.Where(predicate);
-            return result.ToList();
+
+            var data = result.Where(predicate).ToList();
+            return data;
         }
 
         public List<DdlDto> GetDeaprtmentDataList()

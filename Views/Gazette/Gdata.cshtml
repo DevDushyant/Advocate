@@ -11,11 +11,11 @@
         <partial name="~/Views/Shared/_GazzetSearchPartial.cshtml" />
     </div>
 </div>
-<div class="row">
+<div class="row" id="divresult">
     <div class="col-lg-12">
         <div class="card">
             <div class="col-sm-12" style="padding:20px">
-               
+                <div id="result"></div>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
     {
     <script>
         $(document).ready(function () {
-            debugger;
+            $("#divresult").hide();
             $("#GNatureId").select2({
                 placeholder: "Select Nature",
                 theme: "bootstrap4",
@@ -61,10 +61,34 @@
                 }
             });
 
-
+            $("#btnSearch").click(function () { GetGazzetData() });
         });
         function loadData() {
             $('#viewAll').load('/Litigation/CaseTracking/LoadAll');
+        }
+        function GetGazzetData() {
+            var search = {
+                GNatureId: $("#GNatureId").val(),
+                Category: $("#GazzetId").val(),
+                part_section: $("#PartId").val(),
+                Year: $("#Year").val(),
+                Department: $("#DepartmentId").val(),
+            };
+
+            $.ajax({
+                url: '/Gazette/SearchEGazzet',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: JSON.stringify(search),
+                success: function (result) {
+                    $("#result").append(result);
+                    $("#divresult").show();
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
         }
     </script>
 }

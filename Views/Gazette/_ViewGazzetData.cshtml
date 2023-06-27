@@ -7,8 +7,7 @@
             <th>Subject</th>
             <th>Issue Date</th>
             <th>Publish Date</th>
-            <th>Reference No</th>
-            <th>File Size</th>
+            <th>Reference No</th>           
             <th>Action</th>
         </tr>
     </thead>
@@ -16,29 +15,27 @@
         @{
             int count = 0;
         }
-        @foreach (var bt in Model)
+        @foreach (var bt in Model.Select((x, i) => new { Data = x, Index = i }))
         {
             <tr>
+                <td>@(@bt.Index + 1)</td>
                 <td>
-                    @count++;
+                    @bt.Data.oraganization
                 </td>
                 <td>
-                    @bt.oraganization
+                    @bt.Data.subject
                 </td>
                 <td>
-                    @bt.subject
+                    @bt.Data.issue_date
                 </td>
                 <td>
-                    @bt.issue_date
+                    @bt.Data.publish_date
                 </td>
                 <td>
-                    @bt.publish_date
+                    @bt.Data.reference_no
                 </td>
                 <td>
-                    @bt.reference_no
-                </td>
-                <td>
-                   
+                    <a href="@bt.Data.file_name" target="_blank" title="Detail" data-toggle="tooltip"><span class="material-icons">picture_as_pdf</span></a>
                 </td>
             </tr>
         }
@@ -46,6 +43,6 @@
 </table>
 <script>
     $(document).ready(function () {
-        $("#brandTable").DataTable();
+        $("#tblEGazzet").DataTable();
     });
 </script>

@@ -58,10 +58,10 @@ namespace Advocate.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchEGazzet(GazzetSearchViewModel search)
+        public IActionResult SearchEGazzet(GazzetSearchViewModel gsearchdata)
         {
             string fileFolderPath = "\\upload\\EGZT\\";
-            var searchViewModel = _mapper.Map<GazzetSearchViewModel, EGazzetSearchDto>(search);
+            var searchViewModel = _mapper.Map<GazzetSearchViewModel, EGazzetSearchDto>(gsearchdata);
             var EGztData = _eGazzetService.EGazzetData(searchViewModel);
             var result = _mapper.Map<List<EGazzetDataEntity>, List<GazzetDataDto>>(EGztData);
             var finaldt = result.Select(s => new GazzetDataDto

@@ -2,6 +2,7 @@
 {
 	public class GazzetDataDto
 	{
+        public int Id { get; set; }
         public  int gazzetTypeId { get; set; }
         public string oraganization { get; set; }
 		public string department { get; set; }

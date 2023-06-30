@@ -20,6 +20,35 @@
         </div>
     </div>
 </div>
+<div id="modelGazzetEntry" class="modal fade;" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" style="width:1250px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gazzet Entry Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="actlist">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <label for="fname" class="control-label col-sm-5">First Name</label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="fname" placeholder="First name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnUpload">Upload</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts
     {
     <script>
@@ -67,9 +96,9 @@
             $('#viewAll').load('/Litigation/CaseTracking/LoadAll');
         }
         function GetGazzetData() {
-            var search = {
-                GNatureId: $("#GNatureId").val(),
-                Category: $("#GazzetId").val(),
+            var inputparam = {
+                GNatureId: $("#GazzetId").val(),
+                Category: $("#GNatureId").val(),
                 part_section: $("#PartId").val(),
                 Year: $("#Year").val(),
                 Department: $("#DepartmentId").val(),
@@ -78,17 +107,48 @@
             $.ajax({
                 url: '/Gazette/SearchEGazzet',
                 type: "POST",
-                contentType: false, // Not to set any content header
-                processData: false, // Not to process data
-                data: JSON.stringify(search),
+                data: { gsearchdata: inputparam },
+                beforeSend: function () {
+                    $("#loader").show()
+                },
                 success: function (result) {
+                    $("#loader").hide()
+                    $("#result").html("");
                     $("#result").append(result);
                     $("#divresult").show();
+                    $("#tblEGazzet").DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                text: 'My button',
+                                action: function (e, dt, node, config) {
+                                    alert('Button activated');
+                                }
+                            }
+                        ]
+                    });
                 },
                 error: function (err) {
                     alert(err.statusText);
                 }
             });
+        }
+
+        function selectAll() {
+            var checked = this.checked;
+            $('input[name=selectedId]').each(function () {
+                $(this).prop('checked', checked);
+            });
+        }
+        $('#chk_select_all').on('change', selectAll);
+
+        $('input[name=selectedId]').change(function () {
+            $('#chk_select_all').prop('checked', $('input[name=selectedId]:checked').length == $('input[name=selectedId]').length);
+        });
+        GazzetEntry=function(gazzetId)
+        {
+          
+            $("#modelGazzetEntry").modal("show");
         }
     </script>
 }

@@ -37,6 +37,10 @@ namespace Advocate.Services
         {
 
             var predicate = PredicateBuilder.New<EGazzetDataEntity>(true);
+
+            if (param.GNatureId != 0)
+                predicate.And(p => p.gazzetTypeId.Equals(param.GNatureId));
+
             if (!string.IsNullOrEmpty(param.Category))
                 predicate.And(p => p.category.Equals(param.Category));
 
@@ -45,6 +49,9 @@ namespace Advocate.Services
 
             if (!string.IsNullOrEmpty(param.part_section))
                 predicate.And(p => p.part_section.Equals(param.part_section));
+
+            if (param.Year != 0)
+                predicate.And(p => p.file_name.Contains(param.Year.ToString()));
 
             var result = dbContext.EGazzetDataEntities.AsNoTracking().AsExpandable();
 

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Advocate.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
 namespace Advocate.Controllers
@@ -12,6 +14,7 @@ namespace Advocate.Controllers
     [Authorize]
     public abstract class BaseController : Controller
     {
+        
         public void notify(string message, NotificationType notificationType, string title = "")
         {
             var msg = new
@@ -37,5 +40,7 @@ namespace Advocate.Controllers
             };
             TempData["confirmation_notification"] = JsonConvert.SerializeObject(msg);
         }
+
+        
     }
 }

@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Gazzet Data ";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-8"><h4>Gazzet Data <b>List</b></h4></div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-lg-12">
+        <partial name="~/Views/Shared/_GazzetSearchPartial.cshtml" />
+    </div>
+</div>
+<div class="row" id="divresult">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="col-sm-12" style="padding:20px">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modelGazzetEntry" class="modal fade;" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" style="width:1250px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gazzet Entry Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="actlist">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <label for="fname" class="control-label col-sm-5">First Name</label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="fname" placeholder="First name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnUpload">Upload</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#divresult").hide();
+            $("#GNatureId").select2({
+                placeholder: "Select Nature",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#GazzetId").select2({
+                placeholder: "Select Type",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#PartId").select2({
+                placeholder: "Select Part",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#Year").select2({
+                placeholder: "Select Year",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $("#DepartmentId").select2({
+                placeholder: "Select Department",
+                theme: "bootstrap4",
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+
+            $("#btnSearch").click(function () { GetGazzetData() });
+        });
+        function loadData() {
+            $('#viewAll').load('/Litigation/CaseTracking/LoadAll');
+        }
+        function GetGazzetData() {
+            var inputparam = {
+                GNatureId: $("#GazzetId").val(),
+                Category: $("#GNatureId").val(),
+                part_section: $("#PartId").val(),
+                Year: $("#Year").val(),
+                Department: $("#DepartmentId").val(),
+            };
+
+            $.ajax({
+                url: '/Gazette/SearchEGazzet',
+                type: "POST",
+                data: { gsearchdata: inputparam },
+                beforeSend: function () {
+                    $("#loader").show()
+                },
+                success: function (result) {
+                    $("#loader").hide()
+                    $("#result").html("");
+                    $("#result").append(result);
+                    $("#divresult").show();
+                    $("#tblEGazzet").DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                text: 'My button',
+                                action: function (e, dt, node, config) {
+                                    alert('Button activated');
+                                }
+                            }
+                        ]
+                    });
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        }
+
+        function selectAll() {
+            var checked = this.checked;
+            $('input[name=selectedId]').each(function () {
+                $(this).prop('checked', checked);
+            });
+        }
+        $('#chk_select_all').on('change', selectAll);
+
+        $('input[name=selectedId]').change(function () {
+            $('#chk_select_all').prop('checked', $('input[name=selectedId]:checked').length == $('input[name=selectedId]').length);
+        });
+        GazzetEntry=function(gazzetId)
+        {
+          
+            $("#modelGazzetEntry").modal("show");
+        }
+    </script>
+}

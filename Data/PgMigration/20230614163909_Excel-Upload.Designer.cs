@@ -3,15 +3,17 @@ using System;
 using Advocate.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Advocate.Data.PgMigration
 {
     [DbContext(typeof(AdvocateContext))]
-    partial class AdvocateContextModelSnapshot : ModelSnapshot
+    [Migration("20230614163909_Excel-Upload")]
+    partial class ExcelUpload
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -388,6 +390,9 @@ namespace Advocate.Data.PgMigration
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<int?>("GazzetTypeId")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -403,14 +408,8 @@ namespace Advocate.Data.PgMigration
                     b.Property<string>("department")
                         .HasColumnType("text");
 
-                    b.Property<string>("file_name")
-                        .HasColumnType("text");
-
                     b.Property<string>("file_size")
                         .HasColumnType("text");
-
-                    b.Property<int>("gazzetTypeId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("issue_date")
                         .HasColumnType("text");
@@ -434,6 +433,8 @@ namespace Advocate.Data.PgMigration
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GazzetTypeId");
 
                     b.ToTable("Mst_GazetteData");
                 });
@@ -1249,6 +1250,15 @@ namespace Advocate.Data.PgMigration
                         .IsRequired();
 
                     b.Navigation("Act");
+                });
+
+            modelBuilder.Entity("Advocate.Entities.EGazzetDataEntity", b =>
+                {
+                    b.HasOne("Advocate.Entities.GazetteTypeEntity", "gazetteType")
+                        .WithMany()
+                        .HasForeignKey("GazzetTypeId");
+
+                    b.Navigation("gazetteType");
                 });
 
             modelBuilder.Entity("Advocate.Entities.PartEntity", b =>

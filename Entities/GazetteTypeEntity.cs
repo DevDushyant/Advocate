@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Advocate.Entities
 {
-    [Table("Mst_Gazette")]
+    [Table("Mst_GazetteType")]
     public class GazetteTypeEntity : BaseEntity
     {
         [Column(TypeName ="varchar(150)")]

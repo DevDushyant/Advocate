@@ -10,4 +10,9 @@ namespace Advocate.Dtos
         public int Id { get; set; }
         public string text { get; set; }
     }
+    public class DdlDto
+    {
+        public string value { get; set; }
+        public string text { get; set; }
+    }
 }

@@ -1,12 +1,17 @@
 ﻿using Advocate.Common;
+using Advocate.Dtos;
 using Advocate.Entities;
 using Advocate.Interfaces;
 using Advocate.Models;
+using Advocate.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,21 +20,63 @@ namespace Advocate.Controllers
     public class GazetteController : BaseController
     {
         private readonly IGazzetServiceAsync gazzetServiceAsync;
+        private readonly IEGazzetDataServiceAsync _eGazzetService;
+        private readonly ISubGazzetServiceAsync subGazzetServiceAsync;
         private readonly ILogger<NavigationController> _logger;
+        private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IMapper _mapper;
 
-        public GazetteController(IGazzetServiceAsync gazzetServiceAsync, ILogger<NavigationController> _logger, IMapper _mapper)
+        public GazetteController(IGazzetServiceAsync gazzetServiceAsync, IWebHostEnvironment webHostEnvironment, ISubGazzetServiceAsync subGazzetServiceAsync, IEGazzetDataServiceAsync _eGazzetService, ILogger<NavigationController> _logger, IMapper _mapper)
         {
             this.gazzetServiceAsync = gazzetServiceAsync;
             this._logger = _logger;
             this._mapper = _mapper;
+            this.subGazzetServiceAsync = subGazzetServiceAsync;
+            this._eGazzetService = _eGazzetService;
+            this.webHostEnvironment = webHostEnvironment;
 
         }
         public IActionResult Index()
         {
-            var result = _mapper.Map<IEnumerable<GazetteTypeEntity>, IEnumerable<GazetteViewModel>>(gazzetServiceAsync.GetAllAsync().OrderByDescending(ord=>ord.Id));
+            var result = _mapper.Map<IEnumerable<GazetteTypeEntity>, IEnumerable<GazetteViewModel>>(gazzetServiceAsync.GetAllAsync().OrderByDescending(ord => ord.Id));
             return View(result);
         }
+
+        public IActionResult Gdata()
+        {
+            GazzetSearchViewModel viewModel = new GazzetSearchViewModel();
+            var gztViewModel = _mapper.Map<IEnumerable<GazetteTypeEntity>, IEnumerable<GazetteViewModel>>(gazzetServiceAsync.GetAllAsync());
+            var LstPart = _eGazzetService.GetPart();
+            var LstCategory = _eGazzetService.GetCategory();
+            var LstDepartment = _eGazzetService.GetDeaprtmentDataList();
+            viewModel.LstNature = new SelectList(LstCategory, nameof(DdlDto.value), nameof(DdlDto.text), null, null);
+            viewModel.LstYear = new SelectList(StaticDropDownDictionaries.YearDictionary(), "Key", "Value");
+            viewModel.LstGazzets = new SelectList(gztViewModel, nameof(GazetteViewModel.Id), nameof(GazetteViewModel.GazetteName), null, null);
+            viewModel.LstParts = new SelectList(LstPart, nameof(DdlDto.value), nameof(DdlDto.text), null, null);
+            viewModel.LstDepartment = new SelectList(LstDepartment, nameof(DdlDto.value), nameof(DdlDto.text), null, null);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult SearchEGazzet(GazzetSearchViewModel gsearchdata)
+        {
+            string fileFolderPath = "\\upload\\EGZT\\";
+            var searchViewModel = _mapper.Map<GazzetSearchViewModel, EGazzetSearchDto>(gsearchdata);
+            var EGztData = _eGazzetService.EGazzetData(searchViewModel);
+            var result = _mapper.Map<List<EGazzetDataEntity>, List<GazzetDataDto>>(EGztData);
+            var finaldt = result.Select(s => new GazzetDataDto
+            {
+                oraganization = s.oraganization,
+                subject = s.subject,
+                issue_date = s.issue_date,
+                publish_date = s.publish_date,
+                reference_no = s.reference_no,
+                file_name = fileFolderPath+s.file_name
+            });
+
+            return PartialView("_ViewGazzetData", finaldt.ToList());
+        }
+
 
         public IActionResult Create()
         {
@@ -37,7 +84,8 @@ namespace Advocate.Controllers
         }
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Create(GazetteViewModel obj) {
+        public IActionResult Create(GazetteViewModel obj)
+        {
             try
             {
                 if (ModelState.IsValid)
@@ -91,7 +139,7 @@ namespace Advocate.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Edit(int id,GazetteViewModel obj)
+        public IActionResult Edit(int id, GazetteViewModel obj)
         {
             try
             {
@@ -150,12 +198,13 @@ namespace Advocate.Controllers
                 };
 
                 var result = gazzetServiceAsync.DeleteAsync(obj);
-                if(result>0)
-                notify("Record succefully deleted!", NotificationType.success);
+                if (result > 0)
+                    notify("Record succefully deleted!", NotificationType.success);
                 else
                     notify("There is an issue while deleting the record!", NotificationType.success);
                 return RedirectToAction("index");
             }
         }
+
     }
 }

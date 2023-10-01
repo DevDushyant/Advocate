@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "";
+
+}
+@model Advocate.Models.GazzetSearchViewModel
+<div class="card">
+    <div class="col-sm-12" style="padding:20px">
+        <form id="create-form" method="post" asp-controller="Gazette" asp-action="SearchEGazzet" onsubmit="return jQueryModalPost(this);" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select name="GazzetId" class="form-control select2bs4" id="GazzetId"
+                                        asp-for="Category" asp-items="@Model.LstGazzets">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select name="GNatureId" class="form-control select2bs4" id="GNatureId"
+                                        asp-for="GNatureId" asp-items="@Model.LstNature">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 is-supream">
+                            <div class="input-group">
+                                <select name="Year" class="form-control select2bs4" id="Year" asp-for="Year"
+                                        asp-items="@Model.LstYear">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-3 is-supream">
+                            <div class="input-group">
+                                <select name="PartId" class="form-control select2bs4" id="PartId" asp-for="part_section"
+                                        asp-items="@Model.LstParts">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3 is-supream">
+                            <div class="input-group">
+                                <select name="DepartmentId" class="form-control select2bs4" id="DepartmentId" asp-for="Department"
+                                        asp-items="@Model.LstDepartment">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a id="btnSearch" class="btn bg-success">
+                <i class="fa fa-search"></i> Search
+            </a>
+            <a id="reload" class="btn btn-primary text-white">
+                <i class="fa fas fa-reset"></i>
+                Reset
+            </a>
+        </form>
+    </div>
+    <div id="viewAll" class="card-body table-responsive" style="display: none;">
+    </div>
+</div>

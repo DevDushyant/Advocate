@@ -1,0 +1,43 @@
+﻿@model List<Advocate.Dtos.GazzetDataDto>
+<table id="tblEGazzet" class="table table-striped" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Sno.</th>
+            <th>Organization</th>
+            <th>Subject</th>
+            <th>Issue Date</th>
+            <th>Publish Date</th>
+            <th>Reference No</th>
+            <th><input type="checkbox" id="chk_select_all" class="chkall"></th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>      
+        @foreach (var bt in Model.Select((x, i) => new { Data = x, Index = i }))
+        {
+            <tr>
+                <td>@(@bt.Index + 1)</td>
+                <td>
+                    @bt.Data.oraganization
+                </td>
+                <td>
+                    @bt.Data.subject
+                </td>
+                <td>
+                    @bt.Data.issue_date
+                </td>
+                <td>
+                    @bt.Data.publish_date
+                </td>
+                <td>
+                    @bt.Data.reference_no
+                </td>
+                <td><input type="checkbox" id="chk_@bt.Data.Id" class="chkall"><input type="hidden" value="@bt.Data.Id"></td>
+                <td>
+                    <a href="@bt.Data.file_name" target="_blank" title="Open Gazzet PDF" data-toggle="tooltip"><span class="material-icons">picture_as_pdf</span></a> |
+                    <a onclick="GazzetEntry(@bt.Data.Id)" title="Entry for Gazzet" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

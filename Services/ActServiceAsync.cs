@@ -1,15 +1,13 @@
 ﻿using Advocate.Data;
 using Advocate.Dtos;
 using Advocate.Entities;
+using Advocate.Filters;
 using Advocate.Interfaces;
-using Advocate.Models;
+using Advocate.Wrappers;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Advocate.Services
 {
@@ -17,11 +15,13 @@ namespace Advocate.Services
     {
         private readonly AdvocateContext advocateContext;
         private readonly IMapper _mapper;
+        
         public ActServiceAsync(AdvocateContext context, IMapper _mapper) : base(context)
         {
             advocateContext = context;
             this._mapper = _mapper;
-        }
+           
+        }        
 
         public IEnumerable<ActDto> GetAllActs()
         {
@@ -252,7 +252,7 @@ namespace Advocate.Services
         public ActDetailDescriptionDto GetActDetailInfoByActId(string userid, int Id)
         {
             var data = (
-                        from actdata in advocateContext.ActEntities.Where(act => act.Id == Id && act.IsActive == true )
+                        from actdata in advocateContext.ActEntities.Where(act => act.Id == Id && act.IsActive == true)
                         join actType in advocateContext.ActTyes.Where(p => p.IsActive == true) on actdata.ActTypeId equals actType.Id into actType
                         from type in actType.DefaultIfEmpty()
 
@@ -298,7 +298,7 @@ namespace Advocate.Services
 
                         }
                         );
-         
+
             ActDetailDescriptionDto actEntity = new ActDetailDescriptionDto();
             actEntity = data.FirstOrDefault();
             if (actEntity.Subjects != null && actEntity.Subjects != "")

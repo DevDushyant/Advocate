@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Advocate.Areas.Identity.Data;
 using Advocate.Interfaces;
 using Advocate.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace Advocate
 {
@@ -54,12 +55,18 @@ namespace Advocate
                 options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
             });
 
-
-
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("managerole", policy => policy.RequireRole("Super Admin"));
                 options.AddPolicy("managemenu", policy => policy.RequireRole("Super Admin"));
+            });
+
+            services.AddSingleton<IUriService>(o =>
+            {
+                var accessor = o.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriService(uri);
             });
 
         }

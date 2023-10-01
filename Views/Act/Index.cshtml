@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Advocate.Dtos.ActDto>
+﻿@*@model IEnumerable<Advocate.Dtos.ActDto>*@
+@model Advocate.Wrappers.PagedResponse<List<Advocate.Dtos.ActDto>>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
@@ -22,28 +23,35 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i }))
+        @foreach (var item in Model.Data.Select((x, i) => new { Data = x, Index = i }))
         {
-        <tr>
-            <td>@(@item.Index+1)</td>          
-            <td>@item.Data.ActType</td>
-            <td>@item.Data.ActNumber</td>
-            <td>@item.Data.ActYear</td>
-            <td>@item.Data.ActName</td>
-            <td>
-                <a class="edit" onclick="checkactnature(@item.Data.Id)" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                <a class="detail" asp-action="Details" asp-route-id="@item.Data.Id" title="Detail" data-toggle="tooltip"><i class="material-icons">description</i></a>
-                <a class="delete" onclick="deleteRecord('@item.Data.Id')" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                @*<a onclick="DownloadFileFormat('act_file_format.doc')"  title="Download act template for edit" data-toggle="tooltip"><i class="material-icons cloud_download">&#xe2c0;</i></a>*@
-                <a onclick="DownloadActByUser('act_file_format.pdf')" title="Download act pdf" data-toggle="tooltip"><i class="material-icons cloud_download">&#xe2c0;</i></a>
-                <a onclick="UploadActPdf()" title="Upload act pdf" data-toggle="tooltip"><i class="material-icons cloud_upload">&#xe2c3;</i></a>
-            </td>
-        </tr>
+            <tr>
+                <td>@(@item.Index+1)</td>
+                <td>@item.Data.ActType</td>
+                <td>@item.Data.ActNumber</td>
+                <td>@item.Data.ActYear</td>
+                <td>@item.Data.ActName</td>
+                <td>
+                    <a class="edit" onclick="checkactnature(@item.Data.Id)" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                    <a class="detail" asp-action="Details" asp-route-id="@item.Data.Id" title="Detail" data-toggle="tooltip"><i class="material-icons">description</i></a>
+                    <a class="delete" onclick="deleteRecord('@item.Data.Id')" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                    @*<a onclick="DownloadFileFormat('act_file_format.doc')"  title="Download act template for edit" data-toggle="tooltip"><i class="material-icons cloud_download">&#xe2c0;</i></a>*@
+                    <a onclick="DownloadActByUser('act_file_format.pdf')" title="Download act pdf" data-toggle="tooltip"><i class="material-icons cloud_download">&#xe2c0;</i></a>
+                    <a onclick="UploadActPdf()" title="Upload act pdf" data-toggle="tooltip"><i class="material-icons cloud_upload">&#xe2c3;</i></a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+@{
+    var prevdisbaled = !Model.HasPrevious ? "disabled" : "";
+    var nexdisbaled = !Model.HasNext ? "disabled" : "";
+}
 
-<div id="uploadModelPopup"  class="modal fade;" tabindex="-1" role="dialog" data-backdrop="static">
+<a asp-action="Index" asp-route-PageNumber="@(Model.PageNumber-1)" class="btn btn-default @prevdisbaled">Previous</a>
+<a asp-action="Index" asp-route-PageNumber="@(Model.PageNumber+1)" class="btn btn-default @nexdisbaled">Next</a>
+
+<div id="uploadModelPopup" class="modal fade;" tabindex="-1" role="dialog" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -53,7 +61,7 @@
                 </button>
             </div>
             <div class="modal-body" id="actlist">
-               <input type="file" id="act_pdf" name="act_padf" />
+                <input type="file" id="act_pdf" name="act_padf" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" @*data-dismiss="modal"*@ id="btnUpload">Upload</button>
@@ -64,6 +72,7 @@
 </div>
 @section Scripts{
     <script src="~/js/list_act.js"></script>
+    
 }
 
 
